@@ -1,0 +1,12 @@
+
+.vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+}
+#errortext{
+    color:red;
+}
+body {
+    background-color: #FFFFFF
+}
