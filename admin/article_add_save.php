@@ -7,7 +7,7 @@ $name = $con->real_escape_string($_POST["name"]);
 $date = $con->real_escape_string($_POST["date"]);
 $reftext = $con->real_escape_string($_POST["reftext"]);
 $refurl = $con->real_escape_string($_POST["refurl"]);
-$data = $_POST["data"];
+$data = $con->real_escape_string($_POST["data"]);
 
 if (isset($_POST["editid"])) {
     //edit

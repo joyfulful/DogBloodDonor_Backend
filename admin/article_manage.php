@@ -116,10 +116,18 @@
                 $("#navarticle").addClass("active");
                 $("#navarticle_manage").addClass("active");
                 $('.collapsible').collapsible();
-                $("#datatables1").DataTable();
-                $("#datatables2").DataTable();
-                $("#datatables3").DataTable();
-                $("#datatables4").DataTable();
+                $("#datatables1").DataTable({
+                          "order": [[ 0, "desc" ]]
+                      });
+                $("#datatables2").DataTable({
+                          "order": [[ 0, "desc" ]]
+                      });
+                $("#datatables3").DataTable({
+                          "order": [[ 0, "desc" ]]
+                      });
+                $("#datatables4").DataTable({
+                          "order": [[ 0, "desc" ]]
+                      });
                 $(".delbtn").on("click", function (e) {
                     $("#delshowid").html($(this).attr("data-id"));
                     $("#delshowname").html($(this).attr("data-name"));

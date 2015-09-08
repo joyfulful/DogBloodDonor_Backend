@@ -96,7 +96,7 @@ if (isset($_GET["editid"])) {
                     </td>
                     <td  style="width:50%;">
                         <div style="width:100%; padding-left:30px;">
-                            <div id="summernote"><?= @$dataedit["article_text"] ?></div>
+                            <div id="summernote" style="font-family:'TH Sarabun New';"><?= @$dataedit["article_text"] ?></div>
                         </div>
                         <input type="hidden" name="data" id="summernotedata">
                         <?php if (isset($_GET["editid"])) { ?>
@@ -118,16 +118,25 @@ if (isset($_GET["editid"])) {
         <script type="text/javascript" src="../assets/js/jquery-2.1.4.min.js"></script>
         <script type="text/javascript" src="../assets/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="../assets/js/summernote.min.js"></script>
-        <script>
+       <script>
             $(document).ready(function () {
-                var width = ($(document).width() / 2)-45;
+                var width = ($(document).width() / 2) - 45;
+                
                 //alert(width);
                 $('#summernote').summernote({
+                    fontNames: [
+                        "TH Sarabun New",'Serif', 'Sans', 'Arial', 'Arial Black', 'Courier',
+                        'Courier New', 'Comic Sans MS', 'Helvetica', 'Impact', 'Lucida Grande',
+                        'Sacramento', 'Tahoma', 'Angsana New' , 'Verdana'],
+                    defaultFontName: 'TH Sarabun New',
                     height: 700, // set editor height
-                    width:width,
+                    width: width,
                     minHeight: null, // set minimum height of editor
                     maxHeight: 1000, // set maximum height of editor
                 });
+                $(".note-editable").css("font-family","TH Sarabun New");
+                $(".note-current-fontname").html("TH Sarabun New");
+                $(".note-current-fontname").css("font-family","TH Sarabun New");
                 $(".articleform").on("submit", function (e) {
                     $("#loader").fadeIn(100);
                     $("#summernotedata").val($('#summernote').code());
