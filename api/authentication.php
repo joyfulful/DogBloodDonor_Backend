@@ -7,7 +7,8 @@ $response = array("result"=>0);
 if($type == "mail"){
     $username = $con->real_escape_string($_POST["username"]);
     $password = $con->real_escape_string($_POST["password"]);
-    $queryUser = $con->query("SELECT * FROM user WHERE email = '$username' AND user_type = 'ma'");
+    $queryUser = $con->query("SELECT * FROM user u JOIN user_profile up on u.user_id = up.user_id "
+            . "WHERE email = '$username' AND user_type = 'ma'");
     if($queryUser->num_rows > 0){
         //found email in user table
         $userdata = $queryUser->fetch_assoc();

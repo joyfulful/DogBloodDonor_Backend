@@ -16,8 +16,10 @@
                 </div>
             </div>
             <div class="container">
-                <h1>You are : <?php echo $_SESSION["userdata"]["firstname"].' '.$_SESSION["userdata"]["lastname"]; ?></h1>
+                <h1>You are : <?php echo $_SESSION["userdata"]["firstname"].' '.$_SESSION["userdata"]["lastname"];  ?></h1>
+             
             </div>
+           
         </main>
 
         <script type="text/javascript" src="../assets/js/jquery-2.1.4.min.js"></script>
