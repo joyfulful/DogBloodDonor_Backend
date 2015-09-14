@@ -131,7 +131,7 @@
                         </div>
                         <div class="row">
                             <div class="input-field col s6 ">
-                                <i class="material-icons prefix"><img src="../img/calendar146.png" style="width:30px" ></i>
+                                <i class="material-icons prefix"><img src="../assets/img/calendar146.png" style="width:30px" ></i>
                                 <input type="text"  name = "date" id = "date" readonly value="<?php echo date('d-m-Y'); ?>"  >
                                 <label for="date"> </label>
                             </div>

@@ -109,8 +109,7 @@
                                 doghtml += '<b>Symptom : </b>' + item.dog_symptom + '<br>';
                             }
                             doghtml += '<b>Weight : </b>' + item.dog_weight + ' Kg<br>';
-                            doghtml += '<div style="position:absolute; right:10px; bottom:5px; opacity: 0.6;">';
-                            doghtml += '<img src="../assets/img/dog/11.png" style="width:100px;">';
+                            doghtml += '<div style="position:absolute; right:10px; bottom:5px; opacity: 0.6;">';          
                             doghtml += '</div>';
                             doghtml += '</div>';
                             doghtml += '</td>';

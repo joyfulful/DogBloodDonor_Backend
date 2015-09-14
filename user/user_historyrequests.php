@@ -19,50 +19,45 @@
                 </div>
             </div>
             <div class="container">
-                <p>
-                    <input type="checkbox" class="filled-in" id="filled-in-box" checked="checked" />
-                    <label for="filled-in-box">Filled in</label>
-                </p>
-                <p>
-                    <input type="checkbox" class="filled-in" id="filled-in-box" checked="checked" />
-                    <label for="filled-in-box">Filled in</label>
-                </p>
                 <div class="row">
                     <br>
                     <table class="striped" id="datatables">
                         <thead>
                             <tr>
-                                <th>ID</th>
-                                <th>Used By</th>
-                                <th>Date to Used</th>
-                                <th>Blood Type</th>
-                                <th>Dog Donor Name</th>
-                                <th>Owner Name</th>
+                                <th>Request Date</th>
+                                <th>For Dog Name</th>
+                                <th>Blood Type</th> 
                                 <th>Volume</th>
-                                <th>PCV</th>                                         
+                                <th>Symptoms</th>
+                                <th></th>
+                                 
+                                <th>Remark</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
                             include "../dbcon.inc.php";
-                            $res = $con->query("SELECT * FROM hospital_bloodstore hb JOIN blood_type bt on hb.bloodtype_id = bt.bloodtype_id  "
-                                    . "JOIN hospital_user hu on hu.hospital_userid = hb.hospitaluser_id "
-                                    . "JOIN hospital_bloodtransaction hbt on hbt.bloodstore_id = hb.bloodstore_id "
-                                    . "where "
-                                    . "hu.hospital_user LIKE '" . substr($_SESSION["userdata"]["hospital_user"], 0, 2) . "%' "
-                                    . "and hb.status = 0 order by hbt.date_useblood DESC");
-                            while ($data = $res->fetch_assoc()) {
+                            $res = $con->query(" SELECT r.created_time, udr.dog_name as request_dog_name ,bt.bloodtype_name,r.amount_volume,r.symptoms,upd.firstname,udd.dog_name as donate_dog_name,d.donate_lastupdate
+                                                    FROM request r 
+                                                    JOIN donate d ON d.request_id = r.request_id 
+                                                    JOIN user_dog udr ON udr.dog_id = r.for_dog_id 
+                                                    JOIN user_dog udd ON udd.dog_id = d.dog_id  
+                                                    JOIN user_profile up ON up.user_id = r.from_user_id 
+                                                    JOIN user_profile upd ON upd.user_id = udd.user_id
+                                                    JOIN user u ON u.user_id = r.from_user_id
+                                                    JOIN blood_type bt ON bt.bloodtype_id = udr.dog_bloodtype_id WHERE u.user_id LIKE '" . $_SESSION["userdata"]["user_id"] . "' ");
+                          while ($data = $res->fetch_assoc()) {
                                 ?>
-                                <tr class="dog1">
-                                    <td><?= $data["bloodtrasaction_id"] ?></td>
-                                    <td><?= $data["hospital_user"] ?></td>
-                                    <td><?= $data["date_useblood"] ?> 
+                                <tr class="showrequest"> 
+                                    <td><?= $data["created_time"] ?></td>
+                                    <td><?= $data["request_dog_name"] ?></td>
                                     <td><?= $data["bloodtype_name"] ?></td>
-                                    <td><?= $data["dogdonor_name"] ?> </td>
-                                    <td><?= $data["donor_name"] ?> </td>
-                                    <td> <?= $data["volume"] ?></td>
-                                    <td> <?= $data["pcv"] ?></td>
-
+                                    <td><?= $data["amount_volume"] ?></td>
+                                    <td><?= $data["symptoms"] ?> </td>
+                                    <td></td>
+                                   
+                                    
+                                    <td></td>
                                 </tr>
                             <?php } ?>
                         </tbody>
@@ -80,7 +75,7 @@
 
         $(document).ready(function () {
             $("#navhistory").addClass("active");
-            $("#navhistory_donate").addClass("active");
+            $("#navhistory_request").addClass("active");
             $('.collapsible').collapsible();
             $("#datatables").DataTable();
 

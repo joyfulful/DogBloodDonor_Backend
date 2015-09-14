@@ -48,6 +48,7 @@
                                     . "JOIN dog_breeds db on db.breeds_id = hd.breeds_id where "
                                     . "hu.hospital_user LIKE '" . substr($_SESSION["userdata"]["hospital_user"], 0, 2) . "%' "
                                     . "and hb.status = 0");
+                            
                             while ($data = $res->fetch_assoc()) {
                                 ?>
                                 <tr>
@@ -61,7 +62,6 @@
                                     <td> <?= $data["pcv"] ?></td>
                                     <td><?= ($data["action"] == "E" ? "Expired" : "Used") ?></td>
                                      <td><?= $data["date_useblood"] ?> 
-
                                 </tr>
                             <?php } ?>
                         </tbody>

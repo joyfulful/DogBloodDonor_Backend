@@ -1,5 +1,4 @@
 <?php include "session.inc.php";
-    
 ?>
 <!DOCTYPE html>
 <html>
@@ -11,12 +10,12 @@
         <title>Welcome</title>
     </head>
     <body>
-        
+
         <?php include "navbar.inc.php"; ?>
         <main>
             <div class="section" id="index-banner">
                 <div class="container">
-                   Blood Donation History
+                    Blood Donation History
                 </div>
             </div>
             <div class="container">
@@ -25,58 +24,62 @@
                     <table class="striped" id="datatables">
                         <thead>
                             <tr>
-                                <th>ID</th>
-                                <th>Used By</th>
-                                <th>Date to Used</th>
-                                <th>Blood Type</th>
+                                <th>Donate Date</th>
                                 <th>Dog Donor Name</th>
-                                <th>Owner Name</th>
-                                <th>Volume</th>
-                                <th>PCV</th>                                         
+                                <th>Blood Type</th>
+                                <th>For Dog Name</th>
+                                <th>Requester Name</th> 
+                                <th>Remark</th>
+
+                            </tr>                                        
                             </tr>
                         </thead>
                         <tbody>
                             <?php
                             include "../dbcon.inc.php";
-                            $res = $con->query("SELECT * FROM hospital_bloodstore hb JOIN blood_type bt on hb.bloodtype_id = bt.bloodtype_id  "
-                                    . "JOIN hospital_user hu on hu.hospital_userid = hb.hospitaluser_id "
-                                    . "JOIN hospital_bloodtransaction hbt on hbt.bloodstore_id = hb.bloodstore_id "
-                                    . "where "
-                                    . "hu.hospital_user LIKE '" . substr($_SESSION["userdata"]["hospital_user"], 0, 2) . "%' "
-                                    . "and hb.status = 0 order by hbt.date_useblood DESC");
+                            $res = $con->query("SELECT  d.donate_lastupdate ,ud.dog_name as dornor_dogname ,bt.bloodtype_name, ur.firstname as requester_name ,udr.dog_name as requester_dogname
+                                                FROM donate d 
+                                                JOIN user_dog ud  ON ud.dog_id = d.dog_id
+                                                JOIN user u ON u.user_id = ud.user_id 
+                                                JOIN blood_type bt ON bt.bloodtype_id =ud.dog_bloodtype_id
+                                                JOIN request r ON r.request_id = d.request_id
+                                                JOIN user_profile ur ON ur.user_id = r.from_user_id
+                                                JOIN user_dog udr ON udr.dog_id = r.for_dog_id
+                                                WHERE u.user_id LIKE '" . $_SESSION["userdata"]["user_id"] . "' ");
                             while ($data = $res->fetch_assoc()) {
                                 ?>
-                                <tr class="dog1">
-                                    <td><?= $data["bloodtrasaction_id"] ?></td>
-                                    <td><?= $data["hospital_user"] ?></td>
-                                    <td><?= $data["date_useblood"] ?> 
+                                <tr class="showdonate">
+                                    <td><?= $data["donate_lastupdate"] ?></td>
+                                    <td><?= $data["dornor_dogname"] ?></td>
                                     <td><?= $data["bloodtype_name"] ?></td>
-                                    <td><?= $data["dogdonor_name"] ?> </td>
-                                    <td><?= $data["donor_name"] ?> </td>
-                                    <td> <?= $data["volume"] ?></td>
-                                    <td> <?= $data["pcv"] ?></td>
-                                  
-                           </tr>
+                                    <td><?= $data["requester_dogname"] ?> </td>
+                                    <td><?= $data["requester_name"] ?></td>
+                                    <td>
+                                        
+                                    </td>
+
+
+                                </tr>
                             <?php } ?>
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
-  
+
     </main>
 
     <script type="text/javascript" src="../assets/js/jquery-2.1.4.min.js"></script>
     <script type="text/javascript" src="../assets/datatables/media/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="../assets/js/materialize.min.js"></script>
     <script>
-      
+
         $(document).ready(function () {
             $("#navhistory").addClass("active");
             $("#navhistory_donate").addClass("active");
             $('.collapsible').collapsible();
             $("#datatables").DataTable();
-     
+
 
         });
     </script>

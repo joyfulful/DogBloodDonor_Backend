@@ -13,7 +13,9 @@
         <li class="no-padding">
             <ul class="collapsible collapsible-accordion">
                 <li class="bold">
+                   
                     <a id ="navhistory" class="collapsible-header  waves-effect waves-red">Dog History </a>
+                    
                     <div class="collapsible-body">
                         <ul>
                             <li id = "navhistory_donate"><a href="user_historydonate.php">Blood Donation</a></li>
