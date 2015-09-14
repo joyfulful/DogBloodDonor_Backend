@@ -28,8 +28,7 @@
                                 <th>Dog Donor Name</th>
                                 <th>Blood Type</th>
                                 <th>For Dog Name</th>
-                                <th>Requester Name</th> 
-                                <th>Remark</th>
+                                <th>Requester Name</th>
 
                             </tr>                                        
                             </tr>
@@ -37,28 +36,23 @@
                         <tbody>
                             <?php
                             include "../dbcon.inc.php";
-                            $res = $con->query("SELECT  d.donate_lastupdate ,ud.dog_name as dornor_dogname ,bt.bloodtype_name, ur.firstname as requester_name ,udr.dog_name as requester_dogname
-                                                FROM donate d 
-                                                JOIN user_dog ud  ON ud.dog_id = d.dog_id
-                                                JOIN user u ON u.user_id = ud.user_id 
-                                                JOIN blood_type bt ON bt.bloodtype_id =ud.dog_bloodtype_id
-                                                JOIN request r ON r.request_id = d.request_id
-                                                JOIN user_profile ur ON ur.user_id = r.from_user_id
-                                                JOIN user_dog udr ON udr.dog_id = r.for_dog_id
-                                                WHERE u.user_id LIKE '" . $_SESSION["userdata"]["user_id"] . "' ");
+                            $currentdate = date('Y-m-d', time());
+                            $res = $con->query("SELECT * FROM donate WHERE dog_id IN "
+                                    . "(SELECT dog_id FROM user_dog WHERE user_id = '" . $_SESSION["userdata"]["user_id"] . "') "
+                                    . "AND request_id IN "
+                                    . "( SELECT request_id FROM request WHERE date(duedate) < '$currentdate' )");
                             while ($data = $res->fetch_assoc()) {
+                                $request = getRequestById($data["request_id"], $con);
+                                $donator_dog = getDogById($data["dog_id"], $con);
+                                $requester_dog = getDogById($request["for_dog_id"], $con);
+                                $requester_owner = getUserById($requester_dog["user_id"], $con)
                                 ?>
                                 <tr class="showdonate">
                                     <td><?= $data["donate_lastupdate"] ?></td>
-                                    <td><?= $data["dornor_dogname"] ?></td>
-                                    <td><?= $data["bloodtype_name"] ?></td>
-                                    <td><?= $data["requester_dogname"] ?> </td>
-                                    <td><?= $data["requester_name"] ?></td>
-                                    <td>
-                                        
-                                    </td>
-
-
+                                    <td><?= $donator_dog["dog_name"] ?></td>
+                                    <td><?= getBloodTypeNameById($donator_dog["dog_bloodtype_id"], $con) ?></td>
+                                    <td><?= $requester_dog["dog_name"] ?> </td>
+                                    <td><?= $requester_owner["firstname"] . " " . $requester_owner["lastname"] ?></td>
                                 </tr>
                             <?php } ?>
                         </tbody>
@@ -85,3 +79,43 @@
     </script>
 </body>
 </html>
+
+<?php
+
+function getRequestById($request_id, $con) {
+    $res = $con->query("SELECT * FROM request WHERE request_id = '$request_id'");
+    if ($res->num_rows > 0) {
+        return $res->fetch_assoc();
+    } else {
+        return array();
+    }
+}
+
+function getDogById($dog_id, $con) {
+    $res = $con->query("SELECT * FROM user_dog WHERE dog_id = '$dog_id'");
+    if ($res->num_rows > 0) {
+        return $res->fetch_assoc();
+    } else {
+        return array();
+    }
+}
+
+function getUserById($user_id, $con) {
+    $res = $con->query("SELECT * FROM user_profile WHERE user_id = '$user_id'");
+    if ($res->num_rows > 0) {
+        return $res->fetch_assoc();
+    } else {
+        return array();
+    }
+}
+
+function getBloodTypeNameById($bloodtype_id, $con) {
+    $res = $con->query("SELECT * FROM blood_type WHERE bloodtype_id = '$bloodtype_id'");
+    if ($res->num_rows > 0) {
+        $data = $res->fetch_assoc();
+        return $data["bloodtype_name"];
+    } else {
+        return array();
+    }
+}
+?>
