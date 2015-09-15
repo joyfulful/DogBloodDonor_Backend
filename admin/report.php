@@ -7,12 +7,10 @@
         <link rel="stylesheet" href="../assets/css/admin.css" />
         <title>Report</title>
         <style>
-
         </style>
+        
     </head>
-    <body>
-
-        <?php include "navbar.inc.php"; ?>
+    <body>    <?php include "navbar.inc.php"; ?>
         <main>
             <div class="section" id="index-banner">
                 <div class="container">
@@ -22,14 +20,13 @@
             <div class ="container col s12 ">
                 <div class="row">
                     <div  class="input-field col s3">
-
                         <h5> Type Of Report : </h5>
                     </div>
-
                     <div class="input-field col s3">
                         <a class='dropdown-button btn' href='#' data-activates='dropdown1' style="width: 350px">Select type of Report</a>
                         <ul id='dropdown1' class='dropdown-content'>
-                            <li><a href="#!">Breeds Report</a></li>
+                            <li><a href="#!">Breeds'Requester Report</a></li>
+                             <li><a href="#!">Breeds'Donation Report</a></li>
                             <li><a href="#!">Blood Donation Report</a></li>
                             <li><a href="#!">Blood Requesting Report</a></li>
                         </ul>    
@@ -52,6 +49,7 @@
 
 
             </div>
+            <script src="Chart.js"></script>
 
             <script type="text/javascript" src="../assets/js/jquery-2.1.4.min.js"></script>
             <script type="text/javascript" src="../assets/js/materialize.min.js"></script>
