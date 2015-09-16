@@ -114,7 +114,7 @@
                                 <i class="material-icons prefix">
                                     <img src="../assets/img/volumeicon .png" style="width:30px" >
                                 </i>
-                                <input id="volume" name="volume" type="number" class="validate" required disabled>
+                                <input id="volume" name="volume" type="number" min="0" class="validate" required disabled>
                                 <label for ="volume">Volume</label>
                             </div>
                             <div class="col s1" > 
@@ -122,7 +122,7 @@
                             </div>
 
                             <div class="input-field col s5 ">
-                                <input id="pcv" name="pcv" type="number" step="0.01" value="0.00" max="100.00" class="validate" required disabled>
+                                <input id="pcv" name="pcv" type="number" step="0.01" value="0.00" min="0" max="100.00" class="validate" required disabled>
                                 <label for="pcv">PCV </label> 
                             </div>
                             <div class="col s1" > 
