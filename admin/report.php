@@ -20,8 +20,8 @@
             </div>
             <div class ="container col s12" style="margin-top:30px; margin-bottom:20px;">
                 <div class="row">
-                    <div  class="input-field col s3" style="text-align: right;">
-                        <h5> Type of Report : </h5>
+                    <div  class="input-field col s3" style="text-align: right; ;" >
+                        <h6> Type of Report : </h6>
                     </div>
                     <div class="input-field col s6">
                         <select>
@@ -32,22 +32,54 @@
                         </select>
                     </div>
                 </div>
+
+            </div>
+            <div class ="container col s12" style="margin-top:30px; margin-bottom:20px;">
                 <div class="row">
                     <div class="input-field col s3" style="text-align: right;">
-                        <h5> Type of File : </h5>
+                        <h6> Select month of Report : </h6>
                     </div>
-                    <div class="input-field col s6">
+                    <div class="input-field col s6 " >
                         <select>
-                            <option>PDF</option>
+                            <option>January </option>
+                            <option>February </option>
+                            <option>March </option>
+                            <option>April</option>
+                            <option>May </option>
+                            <option>June</option>
+                            <option>July </option>
+                            <option>August</option>
+                            <option>September</option>
+                            <option>October </option>
+                            <option>November </option>
+                            <option>December </option>
                         </select>
                     </div>
                     <div class="input-field col s2 offset-s1">
                         <button class="btn col s10">Export</button>
                     </div>
                 </div>
+            </div>
+             <div class ="container col s12" style="margin-top:30px; margin-bottom:20px;">
+                <div class="row">
+                    <div class="input-field col s3" style="text-align: right;">
+                        <h6> Select month of Year : </h6>
+                    </div>
+                    <div class="input-field col s6 " >
+                        <select>
+                            <option> 2015</option>
+                            <option> 2016</option>
+                           
+                        </select>
+                    </div>
+                    <div class="input-field col s2 offset-s1">
+                        <button class="btn col s10" disabled="">Export</button>
+                    </div>
+                </div>
+            </div>
 
+            <div class="row">
                 <div id="chart_div"></div>
-
 
             </div>
 
@@ -100,11 +132,11 @@
                     data.addColumn('string', 'สายพันธ์สุนัข');
                     data.addColumn('number', 'เปอร์เซ็นการขอเลือด');
                     data.addRows([
-                        <?php
-                        foreach ($dogbreeds as $key => $value) {
-                            echo "['".$value["breeds_name"]."', ".($value["count"]/$countsum)."],";
-                        }
-                        ?>
+<?php
+foreach ($dogbreeds as $key => $value) {
+    echo "['" . $value["breeds_name"] . "', " . ($value["count"] / $countsum) . "],";
+}
+?>
                     ]);
 
                     var options = {
