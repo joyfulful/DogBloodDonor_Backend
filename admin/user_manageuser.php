@@ -63,7 +63,7 @@
                                     <td>
                                         <button class="btn red smbtn delbtn" 
                                                 data-userid="<?= $data["user_id"] ?>"  
-                                                data-usertype="<?= $data["user_type"] ?>"  
+                                                data-usertype="<?= ($data["user_type"]=="ma"?"Email":"Facebook") ?>"  
                                                 data-name="<?= $data["firstname"] ?> <?= $data["lastname"] ?>" 
                                                 data-email="<?= $data["email"] ?>"
                                                 data-dogname="<?= $dog_name ?>">
@@ -103,7 +103,7 @@
 
             <div id="viewmodal" >
                 <div style="width:1000px; margin:0 auto;">
-                    <button class="btn" id="userclosebtn" style="position: fixed; bottom:20px; right:40px;">Close</button>
+                    <button class="btn" id="userclosebtn" style="position: fixed; bottom:20px; right:40px;">Back</button>
                     <table><tr><td style="width:500px;" valign="top">
                                 <div class="row">
                                     <div class="col s11">

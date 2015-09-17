@@ -96,7 +96,7 @@
                                                     <option value="" disabled selected>Select BloodType</option>
                                                     <?php
                                                     include "../dbcon.inc.php";
-                                                    $res = $con->query("SELECT * FROM blood_type");
+                                                    $res = $con->query("SELECT * FROM blood_type where bloodtype_id != 9");
                                                     while ($data = $res->fetch_assoc()) {
                                                         ?>
                                                         <option value="<?= $data["bloodtype_id"] ?>"><?= $data["bloodtype_name"] ?></option>

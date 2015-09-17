@@ -107,7 +107,7 @@
                     </form>
                     </main>
 
-                    <script type="text/javascript" src="../assets/js /jquery-2.1.4.min.js"></script>
+                    <script type="text/javascript" src="../assets/js/jquery-2.1.4.min.js"></script>
                     <script type="text/javascript" src="../assets/js/materialize.min.js"></script>
                     <script type="text/javascript" src="../assets/js/jquery.maskedinput.min.js"></script>
                     <script>

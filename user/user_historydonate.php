@@ -39,8 +39,7 @@
                             $currentdate = date('Y-m-d', time());
                             $res = $con->query("SELECT * FROM donate WHERE dog_id IN "
                                     . "(SELECT dog_id FROM user_dog WHERE user_id = '" . $_SESSION["userdata"]["user_id"] . "') "
-                                    . "AND request_id IN "
-                                    . "( SELECT request_id FROM request WHERE date(duedate) < '$currentdate' )");
+                                    . " AND donate_status IN (1)");
                             while ($data = $res->fetch_assoc()) {
                                 $request = getRequestById($data["request_id"], $con);
                                 $donator_dog = getDogById($data["dog_id"], $con);

@@ -1,7 +1,7 @@
 <header>
     <ul id="slide-out" class="side-nav fixed">
         <li class="logo">
-            <img src="../assets/img/dog/logo1.png" style="height:120px;">
+            <a href="index.php"> <img src="../assets/img/dog/logo1.png" style="height:120px;"></a>
         </li>
         <li id="navindex" class="bold">
             <a href="index.php" class="waves-effect waves-red">Main Page</a>

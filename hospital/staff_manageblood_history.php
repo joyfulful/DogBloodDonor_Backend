@@ -58,7 +58,7 @@
                                     <td><?= $data["bloodtype_name"] ?></td>
                                     <td><?= $data["hospital_dogdonorname"] ?> </td>
                                     <td><?= $data["hospital_donorname"] ?> </td>
-                                    <td> <?= $data["volume"] ?> ml.</td>
+                                    <td> <?= $data["volume"] ?> cc.</td>
                                     <td> <?= $data["pcv"] ?></td>
                                     <td><?= ($data["action"] == "E" ? "Expired" : "Used") ?></td>
                                      <td><?= $data["date_useblood"] ?> 
@@ -81,7 +81,7 @@
             $("#navhistory").addClass("active");
             $('.collapsible').collapsible();
             $("#datatables").DataTable({
-                "order": [[2, "desc"]]
+                "order": [[9,'desc']]
             });
 
 

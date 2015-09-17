@@ -22,8 +22,8 @@
                     <table class="striped" id="datatables">
                         <thead>
                             <tr>
-                                <th>User ID</th>
-                                <th>User Name</th>
+                                <th>Admin ID</th>
+                                <th>Admin Name</th>
                                 <th style="width:80px;"></th>
                             </tr>
                         </thead>

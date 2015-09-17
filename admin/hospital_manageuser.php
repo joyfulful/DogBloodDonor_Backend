@@ -17,6 +17,7 @@
                 </div>
             </div>
             <div class="row">
+                <div class="container">
                 <div class="col s12">
                     <ul class="tabs">
                         <?php
@@ -27,6 +28,7 @@
                             <li class="tab col s4"><a href="#group<?= $data["hospital_id"] ?>"><?= $data["hospital_nameeng"] ?></a></li>
                         <?php } ?>
                     </ul>
+                </div>
                 </div>
                 <?php
                 $res = $con->query("SELECT * FROM hospital");
