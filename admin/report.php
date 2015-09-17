@@ -83,14 +83,14 @@
                         <button type="button" class="btn" id="exportbtn" 
                                 style="display: none; margin-left:20px; margin-top:20px;">Export PDF</button>
                     </div>
-                    <div class="row" style="position: relative; width:1100px; height:450px;">
-                        <div id="showpreviewloader" style="width:1200px; height:650px; 
+                    <div class="row" style="position: relative; width:100%; height:450px;">
+                        <div id="showpreviewloader" style="width:100%; height:650px; 
                              background-color:white; position: absolute; top:0; left:0; text-align: center; display: none; z-index:5;">
-                            <br><br><br><br><br>
+                            <br><br><br><br><br><br>
                             <img src="../assets/img/loader2.gif" style="width:40px; opacity: 0.8;"><br>
                             Loading...
                         </div>
-                        <iframe style="width:1200px; height:650px; border: none; position: absolute; top:0; left:0;" id="showpreview"></iframe>
+                        <iframe style="width:100%; height:650px; border: none; position: absolute; top:0; left:0;" id="showpreview"></iframe>
                     </div>
                 </div>
             </div>

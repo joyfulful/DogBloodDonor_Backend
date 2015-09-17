@@ -52,6 +52,14 @@
                                     Check Dog ID
                                 </button>
                             </div>
+                            <div class='input-field col s3' style='display:none' id='newdogcheckcancel'>
+                                <a href="staff_addblood.php">
+                                    <button type='button' id="newdogcancel" class='btn orange darken-3 col s10'>
+                                        <i class="material-icons left">cancel</i>
+                                        Cancel
+                                    </button>
+                                </a>
+                            </div>
                             <div class='input-field col s3'>
                                 <button type='button' id="dogsearchbtn" class='btn grey darken-3 col s10'>
                                     <i class="material-icons left">search</i>
@@ -142,7 +150,7 @@
                 </form>
             </div>
         </main>
-      <!-- Dog Search Modal -->
+        <!-- Dog Search Modal -->
         <div id="dogsearchmodal" class="modal" style='height:150%;'>
             <div class="modal-content" style="position: static;">
                 <div class="row" id="dogsearchsearcharea">
@@ -224,7 +232,7 @@
                 </div>
             </div>
         </div>
-     <script type="text/javascript" src="../assets/js/jquery-2.1.4.min.js"></script>
+        <script type="text/javascript" src="../assets/js/jquery-2.1.4.min.js"></script>
         <script type="text/javascript" src="../assets/js/materialize.min.js"></script>
         <script type="text/javascript" src="../assets/js/staff_addblood.js"></script>
 

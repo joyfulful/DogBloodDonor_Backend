@@ -45,30 +45,33 @@
                                    name="<?= $data["bloodtype_name"] ?>">
                                     <div class="card small hover">
                                         <div class="">
-                                           
+
                                             &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <img src="../assets/img/<?= strtolower(str_replace(" ", '', $data["bloodtype_name"])) ?>.png"   style="height:150px" align = "middle">
                                         </div>
                                         <br>
                                         <hr color = "gray" size="1.78">
                                         <div class="card-content" >
-                                              <span class="card-title activator grey-text text-darken-4">
-                                                  <?php
-                                                  $hospital_id = $_SESSION["userdata"]["hospital_id"];
-                                                  $findres = $con->query("SELECT * FROM hospital_bloodstore hb "
-                                                          . "JOIN hospital_dog hd ON hd.hospital_dogid = hb.hospital_dogid "
-                                                          . "JOIN hospital_user hu ON hu.hospital_userid = hb.hospitaluser_id"
-                                                          . " WHERE hd.bloodtype_id = '".$data["bloodtype_id"]."' "
-                                                          . " AND hb.status = 1 AND hu.hospital_id = '$hospital_id'");
-                                                  echo $con->error;
-                                                  $count = $findres->num_rows;
-                                                  ?>
-                                            <p style="line-height: 35px;">
-                                                <b><?= $data["bloodtype_name"] ?></b><br>
-                                                <span style="font-size:0.8em;">Blood Stocks: <?=$count?></span>
-                                            </p>
+                                            <span class="card-title activator grey-text text-darken-4">
+                                                <?php
+                                                $hospital_id = $_SESSION["userdata"]["hospital_id"];
+                                                $findres = $con->query("SELECT SUM(hb.volume) FROM hospital_bloodstore hb "
+                                                        . "JOIN hospital_dog hd ON hd.hospital_dogid = hb.hospital_dogid "
+                                                        . "JOIN hospital_user hu ON hu.hospital_userid = hb.hospitaluser_id"
+                                                        . " WHERE hd.bloodtype_id = '" . $data["bloodtype_id"] . "' "
+                                                        . " AND hb.status = 1 AND hu.hospital_id = '$hospital_id'");
+                                                $countdata = $findres->fetch_array();
+                                                $count = $countdata[0];
+                                                if ($count == "") {
+                                                    $count = 0;
+                                                }
+                                                ?>
+                                                <p style="line-height: 35px;">
+                                                    <b><?= $data["bloodtype_name"] ?></b><br>
+                                                    <span style="font-size:0.8em;">Blood Stocks: <?= $count ?> cc.</span>
+                                                </p>
                                         </div>
                                     </div>
-                                 
+
                                 </a>
                             </td>
                         <?php }

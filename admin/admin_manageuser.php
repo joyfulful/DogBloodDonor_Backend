@@ -76,7 +76,7 @@
             <div id="editmodal" class="modal">
                 <div class="modal-content">
                     <h4>Edit Information for <span id="editshowusername"></span></h4>
-                    <form class="col s12" action="admin_manageuser_edit.php" method="post">
+                    <form class="col s12" id="editform" action="admin_manageuser_edit.php" method="post">
                         <input type="hidden" id="edituserid" name="userid">
                         <div class="row">
                             <div class="input-field col s6">
@@ -86,7 +86,8 @@
                             </div>
                             <div class="input-field col s6">
                                 <input id="editpassword" name ="password" type="password" class="validate" >
-                                ** If you don't want to change password, leave password field blank. 
+                                <input id="editpassword2" style="display:none; margin-top:-45px; padding-top:0px;" placeholder="Confirm Password" name ="password" type="password" class="validate" >
+                                <span id="editpasswordtext">** If you don't want to change password, leave password field blank.</span>
                                 <label for="password">Password</label>
                             </div>
                         </div>
@@ -114,10 +115,32 @@
                     $("#delyes").attr("href", "admin_manageuser_delete.php?userid=" + $(this).attr("data-userid"));
                     $('#deletemodal').openModal();
                 });
+                
+                $("#editpassword").on("keyup",function(e){
+                    var pass1 = $(this).val();
+                    if(pass1.length>0){
+                        $("#editpassword2").show();
+                        $("#editpasswordtext").hide();
+                    }else{
+                        $("#editpassword2").val("");
+                        $("#editpassword2").hide();
+                        $("#editpasswordtext").show();
+                    }
+                });
+                
+                $("#editform").on("submit",function(e){
+                    var pass1 = $("#editpassword").val();
+                    var pass2 = $("#editpassword2").val();
+                    if(pass1 != pass2){
+                        alert("Confirm Password does not match !");
+                        e.preventDefault();
+                        return false;
+                    }
+                });
 
                 $(".editbtn").on("click", function (e) {
                     $("#edituserid").val($(this).attr("data-userid"));
-
+                    $("#editshowusername").html($(this).attr("data-user"));
                     $("#editusername").val($(this).attr("data-user"));
                     $("#editusername").prev().addClass("active");
                     $("#editusername").next().addClass("active");

@@ -105,6 +105,7 @@ $(document).ready(function () {
     //add new dog function
     $("#dogaddbtn").on("click", function (e) {
         $("#newdogbtn").hide();
+        $("#newdogcheckcancel").fadeIn(200);
         $("#newdogcheck").fadeIn(200);
         $("#dogsearchbtn").hide();
         $("#dogid").removeAttr("readonly");
@@ -125,16 +126,17 @@ $(document).ready(function () {
                     if (data.result == "1") {
                         alert("This Dog ID can't use, it is already exists in this hospital !");
                         $("#newdogcheckbtn").removeAttr("disabled");
-                        $("#newdogcheckbtn").html("Search");
+                        $("#newdogcheckbtn").html('<i class="material-icons left">add</i>Check Dog ID');
                     } else if (data.result == "2") {
                         alert("This Dog ID can't use, because it has been used by another Hospital.");
                         $("#newdogcheckbtn").removeAttr("disabled");
-                        $("#newdogcheckbtn").html("Search");
+                        $("#newdogcheckbtn").html('<i class="material-icons left">add</i>Check Dog ID');
                     } else if (data.result == "3") {
                         alert("This Dog ID can't use, because it has been removed from database");
                         $("#searchbtn").removeAttr("disabled");
-                        $("#searchbtn").html("Search");
+                        $("#searchbtn").html('<i class="material-icons left">add</i>Check Dog ID');
                     } else {
+                        $("#newdogcheckcancel").hide();
                         $("#newdogcheckbtn").hide();
                         $("#dogsearchbtn").hide();
                         $("#dogsearchbtn").attr("disabled", "disabled");

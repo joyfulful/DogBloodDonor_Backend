@@ -1,21 +1,34 @@
 <?php include "../../dbcon.inc.php"; ?>
-<div id="chart_div"></div>
+<div id="container">
+    <div id="chart_div"></div>
+</div>
 <script type="text/javascript" src="../../assets/js/jquery-2.1.4.min.js"></script>
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<link rel="stylesheet" href="../../assets/font/th-sarabun/fonts.css">
 <style>
     html, body{
         margin:0;
         padding:0;
+        font-family: "Conv_THSarabunNew";
     }
     .noresult{
         position: absolute;
-        top:100px;
-        left:0;
-        width:1000px;
+        top:140px;
+        left:40px;
+        width:100%;
         text-align: center;
         z-index:2;
-        font-size:25px;
+        font-size:35px;
         font-weight: bold;
+    }
+    #container{
+        width:100%;
+        height:600px;
+        overflow: hidden;
+    }
+    #chart_div{
+        width:115%;
+        margin-left:-30px;
     }
 </style>
 <?php
@@ -104,10 +117,13 @@ if (sizeof($bloodtype) == 0) {
         var data = new google.visualization.DataTable();
         data.addColumn('string', 'หมู่เลือดสุนัข');
         data.addColumn('number', 'เปอร์เซ็นการบริจาคเลือด');
+        data.addColumn({type: 'string', role: 'style'});
+        data.addColumn({type: 'string', role: 'annotation'})
         data.addRows([
 <?php
+$colorarr = ["#FDFD96", "#FF6961", "#DEA5A4", "#AEC6CF", "#CFCFC4", "#B39EB5", "#B19CD9", "#03C03C", "#F49AC2", "#779ECB", "#CB99C9", "#FFB347", "#C23B22", "#77DD77"];
 foreach ($bloodtype as $key => $value) {
-    echo "['" . $value["bloodtype_name"] . "', " . ($value["count"] / $countsum) . "],";
+    echo "['" . $value["bloodtype_name"] . "', " . ($value["count"] / $countsum) . ", 'color: " . $colorarr[$key] . "', '" . (($value["count"] / $countsum) * 100) . "%'],";
 }
 ?>
         ]);
@@ -120,17 +136,27 @@ if ($selecttimerange == "yearly") {
     echo 'title: "Top Donated Dog Blood Type In ' . date("F", strtotime("2000-$month-01")) . ', ' . $year . '",';
 }
 ?>
-            width: "100%",
+            width: "10%",
             height: 600,
             legend: 'none',
-            titleTextStyle: { color: '#5c5c5c', fontName: 'Conv_THSarabunNew', fontSize: '25' },
-            vAxis: {maxValue: 1, format: 'percent', gridlines: {count: 5},
-                    textStyle: { color: 'black', 
-                   fontName: 'Conv_THSarabunNew', 
-                   fontSize: '25' }},
-           hAxis : {textStyle: { color: 'black', 
-                   fontName: 'Conv_THSarabunNew', 
-                   fontSize: '25' }}
+            titleTextStyle: {color: '#5c5c5c', fontName: 'Conv_THSarabunNew', fontSize: '25'},
+            vAxis: {minValue: 0, minValue:0, maxValue: 1, format: 'percent', gridlines: {count: 5},
+                textStyle: {color: 'black',
+                    fontName: 'Conv_THSarabunNew',
+                    fontSize: '25'},
+                title: 'Donataion Percentage',
+                titleTextStyle: {color: 'black',
+                    fontName: 'Conv_THSarabunNew',
+                    fontSize: '25'}
+            },
+            hAxis: {textStyle: {color: 'black',
+                    fontName: 'Conv_THSarabunNew',
+                    fontSize: '25'},
+                title: 'Dog Blood Type',
+                titleTextStyle: {color: 'black',
+                    fontName: 'Conv_THSarabunNew',
+                    fontSize: '25'}
+            }
         };
         var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
         chart.draw(data, options);

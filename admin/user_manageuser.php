@@ -104,7 +104,7 @@
             <div id="viewmodal" >
                 <div style="width:1000px; margin:0 auto;">
                     <button class="btn" id="userclosebtn" style="position: fixed; bottom:20px; right:40px;">Back</button>
-                    <table><tr><td style="width:500px;" valign="top">
+                    <table><tr><td style="width:500px; vertical-align: top;">
                                 <div class="row">
                                     <div class="col s11">
                                         <div class="section" id="index-banner" style="font-size:40px; text-align: center;">
