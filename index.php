@@ -4,7 +4,6 @@
         <meta charset="UTF-8" />
         <title></title>
         <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
-        <link rel="stylesheet" href="assets/css/bootstrap-theme.css" />
         <link rel="stylesheet" href="assets/css/animate.css" />
         <link rel="stylesheet" href="assets/css/doogblooddonor.css" />
         <style>
