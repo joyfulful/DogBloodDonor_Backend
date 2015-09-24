@@ -2516,7 +2516,7 @@
 
       // toolbar
       toolbar: [
-        ['style', ['style']],
+       ['style', ['style']],
         ['font', ['bold', 'italic', 'underline', 'clear']],
         // ['font', ['bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript', 'clear']],
         ['fontname', ['fontname']],
@@ -3797,6 +3797,8 @@
                     'justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull',
                     'formatBlock', 'removeFormat',
                     'backColor', 'foreColor', 'fontName'];
+      
+      
 
     for (var idx = 0, len = commands.length; idx < len; idx ++) {
       this[commands[idx]] = (function (sCmd) {
@@ -4360,6 +4362,7 @@
           this.className = isChecked ? 'checked' : '';
         });
       };
+      
 
       /**
        * update button state(active or not).
@@ -4413,6 +4416,7 @@
         return;
       }
 
+      
       // fontname
       var $fontname = $container.find('.note-fontname');
       if ($fontname.length) {
@@ -6170,6 +6174,7 @@
           dropdown: tplDropdown(items, 'note-check')
         });
       },
+      
       fontsize: function (lang, options) {
         var items = options.fontSizes.reduce(function (memo, v) {
           return memo + '<li><a data-event="fontSize" href="#" data-value="' + v + '">' +
@@ -6184,7 +6189,7 @@
           dropdown: tplDropdown(items, 'note-check')
         });
       },
-      color: function (lang, options) {
+     color: function (lang, options) {
         var colorButtonLabel = '<i class="' +
                                   options.iconPrefix + options.icons.color.recent +
                                 '" style="color:black;background-color:yellow;"></i>';

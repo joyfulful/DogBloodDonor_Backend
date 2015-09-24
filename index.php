@@ -71,7 +71,7 @@
                         <input id="username" type="text" class="form-control input-lg" placeholder="Username" required autofocus>
                     </div>
                     <div class="form-group">
-                        <input id="password" type="password" class="form-control input-lg" placeholder="Password" required >
+                        <input id="password" type="password" class="form-control input-lg" placeholder="Password" required="">
                     </div>
                     <div class="form-group">
                         <button id="loginmail" class="btn btn-primary btn-lg btn-block ">Sign In</button>

@@ -133,6 +133,7 @@ if (isset($_GET["editid"])) {
                     width: width,
                     minHeight: null, // set minimum height of editor
                     maxHeight: 1000, // set maximum height of editor
+                    
                 });
                 $(".note-editable").css("font-family","TH Sarabun New");
                 $(".note-current-fontname").html("TH Sarabun New");
