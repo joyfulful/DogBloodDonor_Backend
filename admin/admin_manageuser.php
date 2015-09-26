@@ -81,7 +81,7 @@
                         <div class="row">
                             <div class="input-field col s6">
                                 <i class="material-icons prefix">perm_identity</i>
-                                <input id="editusername" name="username" type="text" class="validate" readonly="" required>
+                                <input id="editusername" name="username" type="text" class="validate" readonly="" required="">
                                 <label for="username">User Name</label>
                             </div>
                             <div class="input-field col s6">

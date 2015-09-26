@@ -37,7 +37,7 @@
                         <div class="row">
                             <div class="input-field col s6">
                                 <i class="material-icons prefix"><img src="../assets/img/id18.png" style="width:30px;"></i>
-                                <input id="dogid" name="dogid" type="text" class="validate" required readonly>
+                                <input id="dogid" name="dogid" type="number" class="validate" required readonly>
                                 <label for="dogid">Dog ID</label>
                             </div>
                             <div class='input-field col s3' id='newdogbtn'>
