@@ -138,6 +138,7 @@ if (isset($_GET["editid"])) {
                         ['font', ['bold', 'italic', 'underline', 'clear']],
                         ['color', ['color']],
                         ['fontname', ['fontname']],
+                        ['fontsize', ['fontsize']],
                         ['para', ['ul', 'ol', 'paragraph']],
                         ['height', ['height']],
                         ['table', ['table']],
