@@ -37,16 +37,19 @@
                                     <td><?= $data["admin_id"] ?></td>
                                     <td><?= $data["admin_username"] ?></td>
                                     <td   style="text-align: right"  >
-                                        <?php if($data['admin_id']!= $_SESSION['userdata']['admin_id']){ ?>
-                                        <button class="btn red smbtn delbtn" style="margin-top:-5px;"
-                                                data-userid="<?= $data["admin_id"] ?>" data-user="<?= $data["admin_username"] ?>" > 
-                                            <i class="material-icons">delete</i>
-                                        </button>
+                                        <?php if ($data['admin_id'] != $_SESSION['userdata']['admin_id']) { ?>
+                                            <button class="btn red smbtn delbtn" style="margin-top:-5px;"
+                                                    data-userid="<?= $data["admin_id"] ?>" data-user="<?= $data["admin_username"] ?>" > 
+                                                <i class="material-icons">delete</i>
+                                            </button>
                                         <?php } ?>
-                                        <button class="btn blue smbtn editbtn" 
-                                                data-userid="<?= $data["admin_id"] ?>" data-user="<?= $data["admin_username"] ?>" > 
-                                            <img src="../assets/img/pencilflat.png" style="height:17px; margin-bottom:3px;">
-                                        </button>
+                                        <?php if ($data['admin_id'] == $_SESSION['userdata']['admin_id']) { ?>
+                                            <button class="btn blue smbtn editbtn" 
+                                                    data-userid="<?= $data["admin_id"] ?>" data-user="<?= $data["admin_username"] ?>" > 
+                                                <img src="../assets/img/pencilflat.png" style="height:17px; margin-bottom:3px;">
+                                            </button>
+                                        <?php } ?>
+
                                     </td>
                                 </tr>
                             <?php } ?>
@@ -58,19 +61,19 @@
             <div id="deletemodal" class="modal">
                 <div class="modal-content">
                     <div class="card-panel" style="background-color: #990000;color: white">
-                    <h4>Are you sure to delete?</h4><br>
-                    
-                       <h5>Admin User</h5><hr>
-                    <p style="font-size: 110%; margin-left: 10%">
-                        User ID : <span id="delshowid"></span><br>
-                        Username : <span id="delshowusername"></span><br>
-                    </p>
-                </div>
-                <div class="modal-footer">
-                    <a href="#!" id="delyes" class="waves-effect waves-green btn-flat">Yes</a>
-                    <a href="#!" class="modal-action modal-close waves-effect waves-red btn-flat ">No</a>
-                </div>
+                        <h4>Are you sure to delete?</h4><br>
+
+                        <h5>Admin User</h5><hr>
+                        <p style="font-size: 110%; margin-left: 10%">
+                            User ID : <span id="delshowid"></span><br>
+                            Username : <span id="delshowusername"></span><br>
+                        </p>
                     </div>
+                    <div class="modal-footer">
+                        <a href="#!" id="delyes" class="waves-effect waves-green btn-flat">Yes</a>
+                        <a href="#!" class="modal-action modal-close waves-effect waves-red btn-flat ">No</a>
+                    </div>
+                </div>
             </div>
 
             <div id="editmodal" class="modal">
@@ -115,23 +118,23 @@
                     $("#delyes").attr("href", "admin_manageuser_delete.php?userid=" + $(this).attr("data-userid"));
                     $('#deletemodal').openModal();
                 });
-                
-                $("#editpassword").on("keyup",function(e){
+
+                $("#editpassword").on("keyup", function (e) {
                     var pass1 = $(this).val();
-                    if(pass1.length>0){
+                    if (pass1.length > 0) {
                         $("#editpassword2").show();
                         $("#editpasswordtext").hide();
-                    }else{
+                    } else {
                         $("#editpassword2").val("");
                         $("#editpassword2").hide();
                         $("#editpasswordtext").show();
                     }
                 });
-                
-                $("#editform").on("submit",function(e){
+
+                $("#editform").on("submit", function (e) {
                     var pass1 = $("#editpassword").val();
                     var pass2 = $("#editpassword2").val();
-                    if(pass1 != pass2){
+                    if (pass1 != pass2) {
                         alert("Confirm Password does not match !");
                         e.preventDefault();
                         return false;
