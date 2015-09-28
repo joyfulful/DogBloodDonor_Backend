@@ -108,7 +108,7 @@
         <script type="text/javascript" src="../assets/js/materialize.min.js"></script>
         <script>
             $(document).ready(function () {
-                $("#navadmin").addClass("active");
+              $("#navadmin").addClass("active");
                 $("#navadmin_manageuser").addClass("active");
                 $('.collapsible').collapsible();
                 $("#datatables").DataTable();
@@ -155,6 +155,6 @@
                     $('#editmodal').openModal();
                 });
             });
-        </script>
+        </script>      
     </body>
 </html>
