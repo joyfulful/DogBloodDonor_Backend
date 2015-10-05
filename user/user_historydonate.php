@@ -28,6 +28,7 @@
                                 <th>Dog Donor Name</th>
                                 <th>Blood Type</th>
                                 <th>For Dog Name</th>
+                                <th>Volume (CC.)</th>
                                 <th>Requester Name</th>
 
                             </tr>                                        
@@ -41,16 +42,19 @@
                                     . "(SELECT dog_id FROM user_dog WHERE user_id = '" . $_SESSION["userdata"]["user_id"] . "') "
                                     . " AND donate_status IN (1)");
                             while ($data = $res->fetch_assoc()) {
-                                $request = getRequestById($data["request_id"], $con);
+                                $request = getRequestById($data["request_id"], $con);        
                                 $donator_dog = getDogById($data["dog_id"], $con);
                                 $requester_dog = getDogById($request["for_dog_id"], $con);
-                                $requester_owner = getUserById($requester_dog["user_id"], $con)
+                                $requester_owner = getUserById($requester_dog["user_id"], $con);
+                              
                                 ?>
+                             
                                 <tr class="showdonate">
                                     <td><?= $data["donate_lastupdate"] ?></td>
                                     <td><?= $donator_dog["dog_name"] ?></td>
                                     <td><?= getBloodTypeNameById($donator_dog["dog_bloodtype_id"], $con) ?></td>
                                     <td><?= $requester_dog["dog_name"] ?> </td>
+                                    <td><?= $request["amount_volume"] ?></td>
                                     <td><?= $requester_owner["firstname"] . " " . $requester_owner["lastname"] ?></td>
                                 </tr>
                             <?php } ?>

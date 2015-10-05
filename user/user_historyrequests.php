@@ -42,10 +42,9 @@
                                 $from_user_id = $data["from_user_id"];
                                 $for_dog = getDogById($data["for_dog_id"], $con);
                                 $getuser = getUserById($data["from_user_id"], $con);
-
                                 $donatorlist = "";
                                 //get donator list
-                                $donator = $con->query("SELECT * FROM donate WHERE request_id = '$request_id'");
+                                $donator = $con->query("SELECT * FROM donate WHERE request_id = '$request_id' and donate_status = 3 ");
                                 $i = 1;
                                 while ($donatordata = $donator->fetch_assoc()) {
                                     $dog = getDogById($donatordata["dog_id"], $con);
