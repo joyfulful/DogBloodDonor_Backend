@@ -129,15 +129,15 @@ if (!isset($_GET['type'])) {
                                                         data-dogdonorname="<?= $data["hospital_dogdonorname"] ?>" 
                                                         data-donorname="<?= $data["hospital_donorname"] ?>" 
                                                         data-volume="<?= $data["volume"] ?>" 
-                                                        data-pcv="<?= $data["pcv"] ?>"
-                                                        <i>Use</i> 
+                                                        data-pcv="<?= $data["pcv"] ?>"> 
+                                                    <img src="../assets/img/hand10.png" style="height:17px; margin-bottom:3px;"> 
                                                 </button>
                                             <?php } ?>
                                             <button class="btn blue smbtn editbtn" style="margin-top:-5px; padding-left:10px; padding-right:10px; " 
                                                     data-bloodstoreid="<?= $data["bloodstore_id"] ?>" 
                                                     data-volume="<?= $data["volume"] ?>" 
                                                     data-pcv="<?= $data["pcv"] ?>">
-                                                    <img src="../assets/img/pencilflat.png" style="height:17px; margin-bottom:3px;"> 
+                                                    <img src="../assets/img/pencilflat.png" style="height:19px; margin-bottom:4px;"> 
                                             </button>
                                         </td>
                                     </tr>

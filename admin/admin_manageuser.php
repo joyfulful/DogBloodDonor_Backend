@@ -20,13 +20,13 @@
                 <div class="row">
                     <br>
                     <table class="striped" id="datatables">
-                        <thead>
+                      <thead>
                             <tr>
                                 <th>Admin ID</th>
                                 <th>Admin Name</th>
                                 <th style="width:80px;"></th>
                             </tr>
-                        </thead>
+                        </thead> 
                         <tbody>
                             <?php
                             include "../dbcon.inc.php";
@@ -34,7 +34,7 @@
                             while ($data = $res->fetch_assoc()) {
                                 ?>
                                 <tr>
-                                    <td><?= $data["admin_id"] ?></td>
+                                   <td><?= $data["admin_id"] ?></td> 
                                     <td><?= $data["admin_username"] ?></td>
                                     <td   style="text-align: right"  >
                                         <?php if ($data['admin_id'] != $_SESSION['userdata']['admin_id']) { ?>
