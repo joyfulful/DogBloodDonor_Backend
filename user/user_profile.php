@@ -98,16 +98,17 @@
                                 doghtml += '<b>Gender : </b>Female<br>';
                             }
                             doghtml += '<b>Blood Type : </b>' + item.dog_bloodtype_name + '<br>';
+                             if (item.dog_birthyear == "") {
+                                doghtml += '<b>Birthyear : </b> - <br>';
+                            } else {
+                                doghtml += '<b>Birthyear : </b>' + item.dog_birthyear + '<br>';
+                            }
                             if (item.dog_disease == "") {
                                 doghtml += '<b>Disease : </b> -<br>';
                             } else {
                                 doghtml += '<b>Disease : </b>' + item.dog_disease + '<br>';
                             }
-                            if (item.dog_symptom == "") {
-                                doghtml += '<b>Symptom : </b> - <br>';
-                            } else {
-                                doghtml += '<b>Symptom : </b>' + item.dog_symptom + '<br>';
-                            }
+                           
                             doghtml += '<b>Weight : </b>' + item.dog_weight + ' Kg<br>';
                             doghtml += '<div style="position:absolute; right:10px; bottom:5px; opacity: 0.6;">';          
                             doghtml += '</div>';
