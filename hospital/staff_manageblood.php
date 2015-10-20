@@ -130,7 +130,7 @@ if (!isset($_GET['type'])) {
                                                         data-donorname="<?= $data["hospital_donorname"] ?>" 
                                                         data-volume="<?= $data["volume"] ?>" 
                                                         data-pcv="<?= $data["pcv"] ?>"> 
-                                                    <img src="../assets/img/hand10.png" style="height:17px; margin-bottom:3px;"> 
+                                                    USE
                                                 </button>
                                             <?php } ?>
                                             <button class="btn blue smbtn editbtn" style="margin-top:-5px; padding-left:10px; padding-right:10px; " 
