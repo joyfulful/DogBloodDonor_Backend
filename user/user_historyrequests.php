@@ -15,7 +15,7 @@
         <main>
             <div class="section" id="index-banner">
                 <div class="container">
-                    Blood Donation History
+                    Blood Request History
                 </div>
             </div>
             <div class="container">
