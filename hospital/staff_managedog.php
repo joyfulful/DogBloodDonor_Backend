@@ -316,7 +316,7 @@
             $('.collapsible').collapsible();
             $("#datatables").DataTable();
 
-            $(".editbtn").on("click", function (e) {
+            $("#datatables").on("click",".editbtn", function (e) {
                 $("#olddogid").val($(this).attr("data-hospitaldogid"));
                 $("#editdogid").val($(this).attr("data-hospitaldogid"));
                 $("#editdogid").prev().addClass("active");
@@ -360,7 +360,7 @@
                 $('#editmodal').openModal();
             });
 
-            $(".delbtn").on("click", function (e) {
+            $("#datatables").on("click",".delbtn", function (e) {
                 $("#delshowdogid").html($(this).attr("data-hospitaldogid"));
                 $("#delshowdogname").html($(this).attr("data-hospitaldogdonorname"));
                 $("#delshowdownername").html($(this).attr("data-hospital_donorname"));

@@ -147,6 +147,7 @@
                 $("#datatables1").DataTable();
                 $("#datatables2").DataTable();
                 $("#datatables3").DataTable();
+                
                 $("#editpassword").on("keyup",function(e){
                     var pass1 = $(this).val();
                     if(pass1.length>0){
@@ -169,7 +170,7 @@
                     }
                 });
 
-                $(".editbtn").on("click", function (e) {
+                $("table").on("click", ".editbtn", function (e) {
                     $("#edituserid").val($(this).attr("data-userid"));
                     $("#editshowusername").html($(this).attr("data-user"));
                     $("#editusername").val($(this).attr("data-user"));

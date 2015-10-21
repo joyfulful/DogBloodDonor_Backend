@@ -57,17 +57,18 @@
                                             $dog_name .= $data2["dog_name"];
                                             if (++$count != $total)
                                                 $dog_name .= ", ";
-                                        } ?>
-                                        <?=$dog_name?>
+                                        }
+                                        ?>
+                                        <?= $dog_name ?>
                                     </td>
                                     <td>
                                         <button class="btn red smbtn delbtn" 
                                                 data-userid="<?= $data["user_id"] ?>"  
-                                                data-usertype="<?= ($data["user_type"]=="ma"?"Email":"Facebook") ?>"  
+                                                data-usertype="<?= ($data["user_type"] == "ma" ? "Email" : "Facebook") ?>"  
                                                 data-name="<?= $data["firstname"] ?> <?= $data["lastname"] ?>" 
                                                 data-email="<?= $data["email"] ?>"
                                                 data-dogname="<?= $dog_name ?>">
-                                                <i class="material-icons">delete</i> 
+                                            <i class="material-icons">delete</i> 
                                         </button>
                                         <button class="btn blue smbtn viewbtn" data-userid="<?= $data["user_id"] ?>">
                                             <i class="material-icons">search</i> 
@@ -76,7 +77,6 @@
                                 </tr>
                             <?php } ?>
                         </tbody>
-
                     </table>
                 </div>
             </div>
@@ -142,8 +142,14 @@
                 $("#navuser").addClass("active");
                 $("#navuser_manageuser").addClass("active");
                 $("#datatables").DataTable();
-                
-                $(".delbtn").on("click", function (e) {
+
+
+                $("#userclosebtn").on("click", function (e) {
+                    $("#viewmodal").fadeOut(500);
+                });
+
+
+                $("#datatables").on("click", ".delbtn", function (e) {
                     $("#delshowid").html($(this).attr("data-userid"));
                     $("#delshowusertype").html($(this).attr("data-usertype"));
                     $("#delshowname").html($(this).attr("data-name"));
@@ -152,11 +158,8 @@
                     $("#delyes").attr("href", "user_manageuser_delete.php?userid=" + $(this).attr("data-userid"));
                     $('#deletemodal').openModal();
                 });
-                
-                $("#userclosebtn").on("click", function (e) {
-                    $("#viewmodal").fadeOut(500);
-                });
-                $(".viewbtn").on("click", function (e) {
+
+                $("#datatables").on("click", ".viewbtn", function (e) {
                     var userid = $(this).attr("data-userid");
                     $.ajax({
                         "url": "../api/getUserDetails.php",
@@ -207,7 +210,7 @@
                                 }
                                 doghtml += '<b>Weight : </b>' + item.dog_weight + ' Kg<br>';
                                 doghtml += '<div style="position:absolute; right:10px; bottom:5px; opacity: 0.6;">';
-                               
+
                                 doghtml += '</div>';
                                 doghtml += '</div>';
                                 doghtml += '</td>';

@@ -128,7 +128,7 @@
                 $("#datatables4").DataTable({
                           "order": [[ 0, "desc" ]]
                       });
-                $(".delbtn").on("click", function (e) {
+                $("table").on("click",".delbtn", function (e) {
                     $("#delshowid").html($(this).attr("data-id"));
                     $("#delshowname").html($(this).attr("data-name"));
                     $("#delyes").attr("href", "article_manage_delete.php?id=" + $(this).attr("data-id"));

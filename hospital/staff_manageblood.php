@@ -243,7 +243,7 @@ if (!isset($_GET['type'])) {
                 }
             });
 
-            $(".usebtn").on("click", function (e) {
+            $("#datatables").on("click", ".usebtn",function (e) {
                 $("#usetext").html("Are you sure to use blood  ?");
                 $("#usetext2").html("Please check for confirm use blood");
                 $("#usebloodid").html($(this).attr("data-bloodstoreid"));
@@ -259,7 +259,7 @@ if (!isset($_GET['type'])) {
                 $('#usemodal').openModal();
             });
 
-            $(".delbtn").on("click", function (e) {
+            $("#datatables").on("click", ".delbtn",function (e) {
                 $("#usetext").html("Are you sure to delete the expired blood  ?");
                 $("#usetext2").html("Please check to confirm delete the expired blood");
                 $("#usebloodid").html($(this).attr("data-bloodstoreid"));

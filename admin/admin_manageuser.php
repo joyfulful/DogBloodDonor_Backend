@@ -54,7 +54,6 @@
                                 </tr>
                             <?php } ?>
                         </tbody>
-
                     </table>
                 </div>
             </div>
@@ -112,7 +111,7 @@
                 $("#navadmin_manageuser").addClass("active");
                 $('.collapsible').collapsible();
                 $("#datatables").DataTable();
-                $(".delbtn").on("click", function (e) {
+                $("#datatables").on("click",".delbtn", function (e) {
                     $("#delshowid").html($(this).attr("data-userid"));
                     $("#delshowusername").html($(this).attr("data-user"));
                     $("#delyes").attr("href", "admin_manageuser_delete.php?userid=" + $(this).attr("data-userid"));
@@ -141,7 +140,7 @@
                     }
                 });
 
-                $(".editbtn").on("click", function (e) {
+                $("#datatables").on("click",".editbtn", function (e) {
                     $("#edituserid").val($(this).attr("data-userid"));
                     $("#editshowusername").html($(this).attr("data-user"));
                     $("#editusername").val($(this).attr("data-user"));
