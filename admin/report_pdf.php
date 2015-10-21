@@ -13,7 +13,7 @@
         <main>
             <div class="section" id="index-banner">
                 <div class="container">
-                    <h3>Report</h3>
+                    <h3>Report (PDF)</h3>
                 </div>
             </div>
             <div class="container">
@@ -29,6 +29,7 @@
                                 <option value="topdonatebreeds">Top Donated Dog Breeds</option>
                                 <option value="toprequestblood">Top Requested Dog Blood</option>
                                 <option value="topdonateblood">Top Donated Dog Blood</option>
+                                <option value="requesteranddonor">Requester and Donor Comparison</option>
                             </select>
                         </div>
                         <div class="input-field col s3">
@@ -40,12 +41,46 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="input-field col s1">
-                            &nbsp;
+                        <div id="selectstartmonth" style="display: none;">
+                            <div class="input-field col s2" style="text-align: right; margin-top:20px;" >
+                                <h6 style="font-weight: bold">Start Month : </h6>
+                            </div>
+                            <div class="input-field col s2">
+                                <select id="selectstartmonthinput">
+                                    <?php
+                                    $currentmonth = date('F', time());
+                                    for ($i = 1; $i <= 12; $i++) {
+                                        $month = date('F', strtotime("2000-$i-01"));
+                                        ?>
+                                        <option <?= ($month == $currentmonth ? "selected" : "") ?> value="<?= $i ?>"><?= $month ?></option>
+                                        <?php
+                                    }
+                                    ?>
+                                </select>
+                            </div>
                         </div>
-                        <div id="selectmonth" style="display: none;">
+                        <div id="selectstartyear" style="display: none;">
                             <div  class="input-field col s1" style="text-align: right; margin-top:20px;" >
-                                <h6 style="font-weight: bold"> Month : </h6>
+                                <h6 style="font-weight: bold"> Year : </h6>
+                            </div>
+                            <div class="input-field col s2">
+                                <select id="selectstartyearinput">
+                                    <?php
+                                    $currentyear = date("Y", time());
+                                    for ($i = 4; $i >= 0; $i--) {
+                                        ?>
+                                        <option <?= ($currentyear - $i == $currentyear ? "selected" : "") ?>  value="<?= $currentyear - $i ?>"><?= $currentyear - $i ?></option>
+                                        <?php
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div id="selectmonth" style="display: none;">
+                            <div class="input-field col s2" style="text-align: right; margin-top:20px;" >
+                                <h6 style="font-weight: bold">End Month : </h6>
                             </div>
                             <div class="input-field col s2">
                                 <select id="selectmonthinput">
@@ -54,7 +89,7 @@
                                     for ($i = 1; $i <= 12; $i++) {
                                         $month = date('F', strtotime("2000-$i-01"));
                                         ?>
-                                        <option name="month" <?= ($month == $currentmonth ? "selected" : "") ?> value="<?= $i ?>"><?= $month ?></option>
+                                        <option <?= ($month == $currentmonth ? "selected" : "") ?> value="<?= $i ?>"><?= $month ?></option>
                                         <?php
                                     }
                                     ?>
@@ -71,7 +106,7 @@
                                     $currentyear = date("Y", time());
                                     for ($i = 4; $i >= 0; $i--) {
                                         ?>
-                                        <option name="month" <?= ($currentyear - $i == $currentyear ? "selected" : "") ?>  value="<?= $currentyear - $i ?>"><?= $currentyear - $i ?></option>
+                                        <option <?= ($currentyear - $i == $currentyear ? "selected" : "") ?>  value="<?= $currentyear - $i ?>"><?= $currentyear - $i ?></option>
                                         <?php
                                     }
                                     ?>
@@ -97,22 +132,35 @@
             <script type="text/javascript" src="../assets/js/jquery-2.1.4.min.js"></script>
             <script type="text/javascript" src="../assets/js/materialize.min.js"></script>
             <script>
+                var currentyear, currentmonth;
                 $(document).ready(function (e) {
-                    $('select').material_select();
+                    currentmonth = $("#selectmonthinput").val();
+                    currentyear = $("#selectyearinput").val();
+                    $.each($("select"), function (i, select) {
+                        $(select).addClass("browser-default");
+                    });
                     $("#navreport").addClass("active");
+                    $("#navreport_pdf").addClass("active");
+                    $('.collapsible').collapsible();
 
                     $("#selecttimerange").on("change", function (e) {
                         var select = $(this).val();
                         if (select == "yearly") {
+                            $("#selectstartmonth").hide();
+                            $("#selectstartyear").hide();
                             $("#selectmonth").hide();
                             $("#selectyear").show();
                             $("#exportbtn").show();
                             $("#previewbtn").show();
+                            cleanEndTime();
                         } else if (select == "monthly") {
+                            $("#selectstartmonth").show();
+                            $("#selectstartyear").show();
                             $("#selectmonth").show();
                             $("#selectyear").show();
                             $("#exportbtn").show();
                             $("#previewbtn").show();
+                            setEndTime();
                         }
                     });
 
@@ -121,11 +169,17 @@
                         var selecttimerange = $("#selecttimerange").val();
                         var month = $("#selectmonthinput").val();
                         var year = $("#selectyearinput").val();
+                        var smonth = $("#selectstartmonthinput").val();
+                        var syear = $("#selectstartyearinput").val();
+                        if(month == null | year == null){
+                            alert("Please Select Month and Year");
+                            return false;
+                        }
                         if (reporttype != null) {
                             $("#previewbtn").attr("disabled", "disabled");
                             $("#exportbtn").attr("disabled", "disabled");
                             $("#showpreviewloader").show();
-                            $("#showpreview").attr("src", "report/" + reporttype + ".php?year=" + year + "&month=" + month + "&selecttimerange=" + selecttimerange);
+                            $("#showpreview").attr("src", "report/" + reporttype + ".php?year=" + year + "&month=" + month + "&smonth=" + smonth + "&syear=" + syear + "&selecttimerange=" + selecttimerange);
                             $("#showpreview").on("load", function (e) {
                                 $("#showpreviewloader").fadeOut(500);
                                 $("#previewbtn").removeAttr("disabled");
@@ -137,11 +191,56 @@
                     $("#exportbtn").on("click", function (e) {
                         var reporttype = $("#reporttype").val();
                         var selecttimerange = $("#selecttimerange").val();
+                        var smonth = $("#selectstartmonthinput").val();
+                        var syear = $("#selectstartyearinput").val();
                         var month = $("#selectmonthinput").val();
                         var year = $("#selectyearinput").val();
-                        document.location = "report/export/?reporttype=" + reporttype + "&year=" + year + "&month=" + month + "&selecttimerange=" + selecttimerange;
+                        document.location = "report/export/?reporttype=" + reporttype + "&year=" + year + "&month=" + month + "&smonth=" + smonth + "&syear=" + syear + "&selecttimerange=" + selecttimerange;
                     });
+
+                    $("#selectstartmonthinput").on("change", function (e) {
+                        setEndTime();
+                    });
+
+                    $("#selectstartyearinput").on("change", function (e) {
+                        setEndTime();
+                    });
+
                 });
+
+                function setEndTime() {
+                    var startmonth = parseInt($("#selectstartmonthinput").val());
+                    var startyear = parseInt($("#selectstartyearinput").val());
+                    $.each($("#selectmonthinput").find("option"), function (i, option) {
+                        if (parseInt($(option).attr("value")) < startmonth) {
+                            $(option).attr("disabled", "disabled");
+                        } else {
+                            $(option).removeAttr("disabled");
+                        }
+                    });
+                    $.each($("#selectyearinput").find("option"), function (i, option) {
+                        $(option).removeAttr("disabled");
+                        if (parseInt($(option).attr("value")) < startyear) {
+                            $(option).attr("disabled", "disabled");
+                        } else {
+                            $(option).removeAttr("disabled");
+                        }
+                    });
+                    $("#selectmonthinput").val(startmonth);
+                    $("#selectyearinput").val(startyear);
+
+                }
+
+                function cleanEndTime() {
+                    $.each($("#selectmonthinput").find("option"), function (i, option) {
+                        $(option).removeAttr("disabled");
+                    });
+                    $.each($("#selectyearinput").find("option"), function (i, option) {
+                        $(option).removeAttr("disabled");
+                    });
+                    $("#selectyearinput").val(currentyear);
+                    $("#selectmonthinput").val(currentmonth);
+                }
             </script>
     </body>
 </html>

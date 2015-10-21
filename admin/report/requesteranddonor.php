@@ -52,65 +52,35 @@ if (isset($_GET["selecttimerange"])) {
 
 $smonth = @$_GET["smonth"];
 $syear = @$_GET["syear"];
-
-$bloodtyperes = $con->query("SELECT * FROM blood_type");
-$bloodtype = array();
-$countsum = 0;
-while ($bloodtypedata = $bloodtyperes->fetch_assoc()) {
-    $bloodtype_id = $bloodtypedata["bloodtype_id"];
-    $bloodtype_name = $bloodtypedata["bloodtype_name"];
-    if ($selecttimerange == "yearly") {
-        $findcountres = $con->query("SELECT count(donate.donate_id) FROM donate "
-                . "JOIN user_dog ON donate.dog_id = user_dog.dog_id "
-                . "WHERE user_dog.dog_bloodtype_id = '$bloodtype_id' "
-                . "AND YEAR(donate.donate_date) = '$year' "
-                . "AND donate.donate_status IN(1,2) ");
-    } else if ($selecttimerange == "monthly") {
-        $findcountres = $con->query("SELECT count(donate.donate_id) FROM donate "
-                . "JOIN user_dog ON donate.dog_id = user_dog.dog_id "
-                . "WHERE user_dog.dog_bloodtype_id = '$bloodtype_id' "
-                . "AND YEAR(donate.donate_date) >= '$syear' "
-                . "AND MONTH(donate.donate_date) >= '$smonth' "
-                . "AND YEAR(donate.donate_date) <= '$year' "
-                . "AND MONTH(donate.donate_date) <= '$month' "
-                . "AND donate.donate_status IN(1,2) ");
-    }
-    echo $con->error;
-    if ($findcountres->num_rows == 0) {
-        $count = 0;
-    } else {
-        $data = $findcountres->fetch_array();
-        $count = $data[0];
-    }
-    if ($count != "0") {
-        $countsum += $count;
-        array_push($bloodtype, array(
-            "bloodtype_id" => $bloodtype_id,
-            "bloodtype_name" => $bloodtype_name,
-            "count" => $count
-        ));
-    }
+if ($selecttimerange == "yearly") {
+    $countrequester = "SELECT count(request_id) FROM request WHERE request_id IN (SELECT request_id FROM donate WHERE donate_status IN (1,2)) "
+            . "AND YEAR(request.created_time) = '$year' ";
+    $countdonator = "SELECT count(donate_id) FROM donate WHERE donate_status = 1 AND YEAR(donate_date) = '$year'";
+} else {
+    $countrequester = "SELECT count(request_id) FROM request WHERE request_id IN (SELECT request_id FROM donate WHERE donate_status IN (1,2)) "
+            . "AND YEAR(request.created_time) >= '$syear' "
+            . "AND MONTH(request.created_time) >= '$smonth' "
+            . "AND YEAR(request.created_time) <= '$year' "
+            . "AND MONTH(request.created_time) <= '$month' ";
+    $countdonator = "SELECT count(donate_id) FROM donate WHERE donate_status = 1 "
+            . "AND YEAR(donate_date) >= '$syear' "
+            . "AND MONTH(donate_date) >= '$smonth' "
+            . "AND YEAR(donate_date) <= '$year' "
+            . "AND MONTH(donate_date) <= '$month' ";
 }
-usort($bloodtype, function($a, $b) {
-    return $a['count'] - $b['count'];
-});
-$bloodtype = array_reverse($bloodtype);
-?>
-
-<?php
-if (sizeof($bloodtype) == 0) {
-    ?>
-    <div class="noresult">
-        <br><br><br>
-        <?php
-        if ($selecttimerange == "yearly") {
-            echo 'No Data In ' . $year;
-        } else if ($selecttimerange == "monthly") {
-            echo 'No Data In ' . date("F", strtotime("2000-$month-01")) . ', ' . $year;
-        }
-        ?>
-    </div>
-    <?php
+$requesterres = $con->query($countrequester);
+$donatorres = $con->query($countdonator);
+if ($requesterres->num_rows > 0) {
+    $requestdata = $requesterres->fetch_array();
+    $requestcount = $requestdata[0];
+} else {
+    $requestcount = 0;
+}
+if ($donatorres->num_rows > 0) {
+    $donatordata = $donatorres->fetch_array();
+    $donatorcount = $donatordata[0];
+} else {
+    $donatordata = 0;
 }
 ?>
 
@@ -127,21 +97,20 @@ if (sizeof($bloodtype) == 0) {
         data.addRows([
 <?php
 $colorarr = ["#FDFD96", "#FF6961", "#DEA5A4", "#AEC6CF", "#CFCFC4", "#B39EB5", "#B19CD9", "#03C03C", "#F49AC2", "#779ECB", "#CB99C9", "#FFB347", "#C23B22", "#77DD77"];
-foreach ($bloodtype as $key => $value) {
-    echo "['" . $value["bloodtype_name"] . "', " . percentFormat(($value["count"] / $countsum)) . ", 'color: " . $colorarr[$key] . "', '" . percentFormat((($value["count"] / $countsum) * 100)) . "%'],";
-}
+echo "['จำนวนครั้งที่ขอเลือด', " . $requestcount . ", 'color: " . $colorarr[0] . "', '" . $requestcount . "'],";
+echo "['จำนวนครั้งที่บริจาคเลือด', " . $donatorcount . ", 'color: " . $colorarr[1] . "', '" . $donatorcount . "'],";
 ?>
         ]);
 
         var options = {
 <?php
 if ($selecttimerange == "yearly") {
-    echo 'title: "Top Donated Dog Blood Type In ' . $year . '",';
+    echo 'title: "Requester and Donor Comparison In ' . $year . '",';
 } else if ($selecttimerange == "monthly") {
     if ($month == $smonth & $year == $syear) {
-        echo 'title: "Top Donated Dog Blood Type In ' . date("F", strtotime("2000-$smonth-01")) . ' ' . $syear . '",';
+        echo 'title: "Requester and Donor Comparison In ' . date("F", strtotime("2000-$smonth-01")) . ' ' . $syear . '",';
     } else {
-        echo 'title: "Top Donated Dog Blood Type Between ' . date("F", strtotime("2000-$smonth-01")) . ' ' . $syear . " to " . date("F", strtotime("2000-$month-01")) . ' ' . $year . '",';
+        echo 'title: "Requester and Donor Comparison Between ' . date("F", strtotime("2000-$smonth-01")) . ' ' . $syear . " to " . date("F", strtotime("2000-$month-01")) . ' ' . $year . '",';
     }
 }
 ?>
@@ -149,11 +118,11 @@ if ($selecttimerange == "yearly") {
             height: 600,
             legend: 'none',
             titleTextStyle: {color: '#5c5c5c', fontName: 'Conv_THSarabunNew', fontSize: '25'},
-            vAxis: {minValue: 0, minValue:0, maxValue: 1, format: 'percent', gridlines: {count: 5},
+            vAxis: {minValue: 0, minValue:0, maxValue: 1, format: '', gridlines: {count: 5},
                 textStyle: {color: 'black',
                     fontName: 'Conv_THSarabunNew',
                     fontSize: '25'},
-                title: 'Donataion Percentage',
+                title: 'จำนวนครั้ง',
                 titleTextStyle: {color: 'black',
                     fontName: 'Conv_THSarabunNew',
                     fontSize: '25'}
@@ -161,7 +130,7 @@ if ($selecttimerange == "yearly") {
             hAxis: {textStyle: {color: 'black',
                     fontName: 'Conv_THSarabunNew',
                     fontSize: '25'},
-                title: 'Dog Blood Type',
+                title: '',
                 titleTextStyle: {color: 'black',
                     fontName: 'Conv_THSarabunNew',
                     fontSize: '25'}

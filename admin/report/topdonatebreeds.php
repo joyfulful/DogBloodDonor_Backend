@@ -50,6 +50,9 @@ if (isset($_GET["selecttimerange"])) {
     $selecttimerange = "yearly";
 }
 
+$smonth = @$_GET["smonth"];
+$syear = @$_GET["syear"];
+
 $dogbreedsres = $con->query("SELECT * FROM dog_breeds");
 $dogbreeds = array();
 $countsum = 0;
@@ -66,8 +69,10 @@ while ($dogbreedsdata = $dogbreedsres->fetch_assoc()) {
         $findcountres = $con->query("SELECT count(donate.donate_id) FROM donate "
                 . "JOIN user_dog ON donate.dog_id = user_dog.dog_id "
                 . "WHERE user_dog.breeds_id = '$breeds_id' "
-                . "AND YEAR(donate.donate_date) = '$year' "
-                . "AND MONTH(donate.donate_date) = '$month' "
+                . "AND YEAR(donate.donate_date) >= '$syear' "
+                . "AND MONTH(donate.donate_date) >= '$smonth' "
+                . "AND YEAR(donate.donate_date) <= '$year' "
+                . "AND MONTH(donate.donate_date) <= '$month' "
                 . "AND donate.donate_status IN(1,2) ");
     }
     if ($findcountres->num_rows == 0) {
@@ -100,7 +105,8 @@ if (sizeof($dogbreeds) == 0) {
         if ($selecttimerange == "yearly") {
             echo 'No Data In ' . $year;
         } else if ($selecttimerange == "monthly") {
-            echo 'No Data In ' . date("F", strtotime("2000-$month-01")) . ', ' . $year;
+            //echo 'No Data In ' . date("F", strtotime("2000-$month-01")) . ', ' . $year;
+            echo "No Data";
         }
         ?>
     </div>
@@ -121,7 +127,7 @@ if (sizeof($dogbreeds) == 0) {
 <?php
 $colorarr = ["#FDFD96", "#FF6961", "#DEA5A4", "#AEC6CF", "#CFCFC4", "#B39EB5", "#B19CD9", "#03C03C", "#F49AC2", "#779ECB", "#CB99C9", "#FFB347", "#C23B22", "#77DD77"];
 foreach ($dogbreeds as $key => $value) {
-    echo "['" . $value["breeds_name"] . "', " . ($value["count"] / $countsum) . ", 'color: " . $colorarr[$key] . "', '" . (($value["count"] / $countsum) * 100) . "%'],";
+    echo "['" . $value["breeds_name"] . "', " . percentFormat(($value["count"] / $countsum)) . ", 'color: " . $colorarr[$key] . "', '" . percentFormat((($value["count"] / $countsum) * 100)) . "%'],";
 }
 ?>
         ]);
@@ -131,7 +137,11 @@ foreach ($dogbreeds as $key => $value) {
 if ($selecttimerange == "yearly") {
     echo 'title: "Top Donated Dog Breeds In ' . $year . '",';
 } else if ($selecttimerange == "monthly") {
-    echo 'title: "Top Doanted Dog Breeds In ' . date("F", strtotime("2000-$month-01")) . ', ' . $year . '",';
+    if($month == $smonth & $year == $syear){
+        echo 'title: "Top Doanted Dog Breeds In ' . date("F", strtotime("2000-$smonth-01")) . ' ' . $syear . '",';
+    }else{
+        echo 'title: "Top Doanted Dog Breeds Between ' . date("F", strtotime("2000-$smonth-01")) . ' ' . $syear . " to ". date("F", strtotime("2000-$month-01")) . ' ' . $year . '",';
+    }
 }
 ?>
             width: "100%",
@@ -161,3 +171,11 @@ if ($selecttimerange == "yearly") {
     }
 
 </script>
+
+
+<?php
+
+function percentFormat($str) {
+    return sprintf('%0.2f', $str);
+}
+?>

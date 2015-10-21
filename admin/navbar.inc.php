@@ -48,8 +48,19 @@
                 </li>
             </ul>
         </li>
-        <li id="navreport" class="bold">
-            <a href="report.php" class="waves-effect waves-red">Report</a>
+        
+        <li class="no-padding">
+            <ul class="collapsible collapsible-accordion">
+                <li class="bold">
+                    <a id="navreport" class="collapsible-header  waves-effect waves-red">Report</a>
+                    <div class="collapsible-body">
+                        <ul>
+                            <li id="navreport_pdf"><a href="report_pdf.php">PDF Report</a></li>
+                            <li id="navreport_csv"><a href="report_csv.php">CSV Report</a></li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
         </li>
         <li id="navlogout" class="bold">
             <a href="../api/logout.php" class="waves-effect waves-red">Logout</a>
