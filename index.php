@@ -124,6 +124,21 @@
                         $("#loginmail").html("Logging in...");
                         var username = $("#username").val();
                         var password = $("#password").val();
+                        if (username.length == 0) {
+                            $(".modal-content").animate({"height": "400px"}, 100);
+                            $("#errortext").html("Please input username !<br><br>");
+                            $("#errortext").fadeIn(100);
+                            $("#loginmail").removeAttr("disabled");
+                            $("#loginmail").html("Sign In");
+                            return false;
+                        } else if (password.length == 0) {
+                            $(".modal-content").animate({"height": "400px"}, 100);
+                            $("#errortext").html("Please input password !<br><br>");
+                            $("#errortext").fadeIn(100);
+                            $("#loginmail").removeAttr("disabled");
+                            $("#loginmail").html("Sign In");
+                              return false;
+                        }
                         $.ajax({
                             type: 'POST',
                             data: {"username": username, "password": password, "type": "mail"},
