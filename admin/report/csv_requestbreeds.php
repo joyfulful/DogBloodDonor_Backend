@@ -31,7 +31,7 @@ if ($selecttimerange == "yearly") {
 $interval = DateInterval::createFromDateString('1 month');
 $period = new DatePeriod($start, $interval, $end);
 
-$head = array("Report Type");
+$head = array("Breeds Name");
 foreach ($period as $dt) {
     array_push($head,$dt->format("F") . " " . $dt->format("Y"));
 }

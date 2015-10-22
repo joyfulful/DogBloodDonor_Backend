@@ -97,8 +97,8 @@ if ($donatorres->num_rows > 0) {
         data.addRows([
 <?php
 $colorarr = ["#FDFD96", "#FF6961", "#DEA5A4", "#AEC6CF", "#CFCFC4", "#B39EB5", "#B19CD9", "#03C03C", "#F49AC2", "#779ECB", "#CB99C9", "#FFB347", "#C23B22", "#77DD77"];
-echo "['Amount of requesters', " . $requestcount . ", 'color: " . $colorarr[0] . "', '" . $requestcount . "'],";
-echo "['Amount of donors', " . $donatorcount . ", 'color: " . $colorarr[1] . "', '" . $donatorcount . "'],";
+echo "['Requesters ', " . $requestcount . ", 'color: " . $colorarr[0] . "', '" . $requestcount . "'],";
+echo "['Donors', " . $donatorcount . ", 'color: " . $colorarr[1] . "', '" . $donatorcount . "'],";
 ?>
         ]);
 
@@ -122,7 +122,7 @@ if ($selecttimerange == "yearly") {
                 textStyle: {color: 'black',
                     fontName: 'Conv_THSarabunNew',
                     fontSize: '25'},
-                title: 'Amount of',
+                title: 'Amount ',
                 titleTextStyle: {color: 'black',
                     fontName: 'Conv_THSarabunNew',
                     fontSize: '25'}
