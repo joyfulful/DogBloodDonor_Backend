@@ -31,7 +31,7 @@ if ($selecttimerange == "yearly") {
 $interval = DateInterval::createFromDateString('1 month');
 $period = new DatePeriod($start, $interval, $end);
 
-$head = array(text("Report Type"));
+$head = array(text("Blood Type"));
 foreach ($period as $dt) {
     array_push($head, text($dt->format("F") . " " . $dt->format("Y")));
 }
