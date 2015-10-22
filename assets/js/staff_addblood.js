@@ -10,9 +10,11 @@ $(document).ready(function () {
         $("#dogsearchresult").hide();
         $("#dogsearchadd").hide();
     });
+    
     $("#dogsearchmodalcancel").on("click", function (e) {
         $("#dogsearchmodal").closeModal();
     });
+    
     $("#dogsearchmodalsearch").on("click", function (e) {
         $("#dogsearchsearchinput").attr("disabled", "disabled");
         $("#dogsearchmodalsearch").attr("disabled", "disabled");
@@ -98,20 +100,14 @@ $(document).ready(function () {
                     $("#pcv").removeAttr("disabled");
                     $("#savebtn").removeAttr("disabled");
                     $("#dogsearchmodal").closeModal();
+                    
+                    $("#newdogcheckbtn").attr("disabled","disabled");
                 }
             }
         });
     });
-    //add new dog function
-    $("#dogaddbtn").on("click", function (e) {
-        $("#newdogbtn").hide();
-        $("#newdogcheckcancel").fadeIn(200);
-        $("#newdogcheck").fadeIn(200);
-        $("#dogsearchbtn").hide();
-        $("#dogid").removeAttr("readonly");
-        $("#dogid").focus();
-    });
-
+    
+    
     $("#newdogcheckbtn").on("click", function (e) {
         var dogid = $("#dogid").val();
         if (dogid.length > 0) {
@@ -124,9 +120,50 @@ $(document).ready(function () {
                 dataType: "json",
                 success: function (data) {
                     if (data.result == "1") {
-                        alert("This Dog ID can't use, it is already exists in this hospital !");
-                        $("#newdogcheckbtn").removeAttr("disabled");
+                        //alert("This Dog ID can't use, it is already exists in this hospital !");
+                        
+                    $("#dogsearchbtn").attr("disabled", "disabled");
+                    $("#dogaddbtn").attr("disabled", "disabled");
+                    $("#dogname").val(data.dogname);
+                    $("#ownername").val(data.donorname);
+                    $("#dogid").prev().addClass("active");
+                    $("#dogid").next().addClass("active");
+                    $("#dogid").addClass("active");
+                    $("#dogid").addClass("vaild");
+                    $("#dogid").attr("readonly", "readonly");
+                    $("#dogname").attr("readonly", "readonly");
+                    $("#ownername").attr("readonly", "readonly");
+                    $("#dogname").prev().addClass("active");
+                    $("#dogname").next().addClass("active");
+                    $("#dogname").addClass("active");
+                    $("#dogname").addClass("vaild");
+                    $("#dogname").focus();
+                    $("#ownername").prev().addClass("active");
+                    $("#ownername").next().addClass("active");
+                    $("#ownername").addClass("active");
+                    $("#ownername").addClass("vaild");
+                    $("#ownername").focus();
+                    $("#breeds").val(data.breeds_name);
+                    $("#breeds").attr("readonly", "readonly");
+                    $("#breeds").prev().addClass("active");
+                    $("#breeds").next().addClass("active");
+                    $("#breeds").addClass("active");
+                    $("#breeds").addClass("vaild");
+                    $("#breeds").focus();
+                    $("#blood").val(data.bloodtype_id);
+                    $("#blood").attr("readonly", "readonly");
+                    $("select").material_select();
+                    $(".caret").filter(".disabled").remove();
+                    $("#dogname").removeAttr("disabled");
+                    $("#ownername").removeAttr("disabled");
+                    $("#volume").removeAttr("disabled");
+                    $("#pcv").removeAttr("disabled");
+                    $("#savebtn").removeAttr("disabled");
+                    $("#dogsearchmodal").closeModal();
+                    
+                        $("#newdogcheckbtn").attr("disabled");
                         $("#newdogcheckbtn").html('<i class="material-icons left">add</i>Check Dog ID');
+                        
                     } else if (data.result == "2") {
                         alert("This Dog ID can't use, because it has been used by another Hospital.");
                         $("#newdogcheckbtn").removeAttr("disabled");
@@ -152,6 +189,7 @@ $(document).ready(function () {
                         $("#savebtn").removeAttr("disabled");
                         $("#dogid").attr("readonly", "readonly");
                         $("#dogname").focus();
+                        $("#resulthtml").html("Dog ID is not in database, This will add new hospital dog in database");
                     }
                 }
             });

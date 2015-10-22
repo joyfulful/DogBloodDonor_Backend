@@ -37,34 +37,23 @@
                         <div class="row">
                             <div class="input-field col s6">
                                 <i class="material-icons prefix"><img src="../assets/img/id18.png" style="width:30px;"></i>
-                                <input id="dogid" name="dogid" type="number" class="validate" required readonly>
+                                <input id="dogid" name="dogid" type="number" class="validate" required>
                                 <label for="dogid">Dog ID</label>
                             </div>
-                            <div class='input-field col s3' id='newdogbtn'>
-                                <button type='button' id="dogaddbtn" class='btn grey darken-3 col s10'>
-                                    <i class="material-icons left">add</i>
-                                    New Dog
-                                </button>
-                            </div>
-                            <div class='input-field col s3' style='display:none' id='newdogcheck'>
+                            <div class='input-field col s3' style='' id='newdogcheck'>
                                 <button type='button' id="newdogcheckbtn" class='btn orange col s10'>
                                     <i class="material-icons left">add</i>
                                     Check Dog ID
                                 </button>
-                            </div>
-                            <div class='input-field col s3' style='display:none' id='newdogcheckcancel'>
-                                <a href="staff_addblood.php">
-                                    <button type='button' id="newdogcancel" class='btn orange darken-3 col s10'>
-                                        <i class="material-icons left">cancel</i>
-                                        Cancel
-                                    </button>
-                                </a>
                             </div>
                             <div class='input-field col s3'>
                                 <button type='button' id="dogsearchbtn" class='btn grey darken-3 col s10'>
                                     <i class="material-icons left">search</i>
                                     Search Dog
                                 </button>
+                            </div>
+                            <div class="col s3" id="resulthtml">
+                                
                             </div>
                         </div>
                         <div class="row" id="dogdetails">
@@ -159,7 +148,6 @@
                     </div>
                     <div class='col s10'>
                         <select id="searchby">
-                            <option value="dogid">Dog ID</option>
                             <option value="dogname">Dog's Name</option>
                             <option value="ownername">Owner's Name</option>
                         </select>
