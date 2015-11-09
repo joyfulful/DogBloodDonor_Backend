@@ -1,0 +1,19 @@
+File,Total Time,Coding %,Debugging %,Testing %,FC% Flow Complexity,OV% Object Vocabulary,OC% Object Conjuration,AI% Arithmetic Intricacy,DT% Data Transfer,ID% Inline Data,CS% Code Structure,CM% Comments,CCR Code to Comment Ratio,ECF Essential Comment Factor,CSM Code Structure Modularity,LD Logic Density,SDE Source Divergence Entropy,IDF Information Diversity Factor,OCF Object Convolution Factor,LLOC Logical Lines of Code,Multi Line Comments,Single Line Comments,High Quality Comments,Strings,Numeric Constants,Code Nature,Quality Notes Count,Quality Notes Detail,
+C:\xampp\htdocs\DogBloodDonorBackend\hospital\aboutUs.php,0,58,26,16,0,52,26,0,0,4,18,0,0,0,0,0,0,150,10,2,0,0,0,2,0,Normal,0,
+C:\xampp\htdocs\DogBloodDonorBackend\hospital\ajax_getnotification.php,15,42,36,23,38,25,10,2,18,2,5,0,10,25,152,140,73,242,18,36,0,4,4,41,9,Data I/O Oriented,1,* Needs more comments. 
+C:\xampp\htdocs\DogBloodDonorBackend\hospital\index.php,2,42,37,21,0,44,14,0,35,3,4,0,0,0,5,40,39,177,16,9,0,0,0,13,0,Data I/O Oriented,0,
+C:\xampp\htdocs\DogBloodDonorBackend\hospital\navbar.inc.php,0,86,7,7,0,0,0,0,0,0,100,0,0,0,0,0,0,0,0,0,0,0,0,0,0,Normal,0,
+C:\xampp\htdocs\DogBloodDonorBackend\hospital\session.inc.php,2,39,38,23,49,22,5,0,16,2,6,0,0,0,125,50,72,120,7,7,0,0,0,7,0,Data Manipulation Oriented,0,
+C:\xampp\htdocs\DogBloodDonorBackend\hospital\staff_addblood.php,2,47,32,22,27,42,10,0,13,2,5,0,0,0,70,62,38,137,13,7,0,0,0,7,0,Data I/O Oriented,0,
+C:\xampp\htdocs\DogBloodDonorBackend\hospital\staff_addblood_save.php,8,47,33,20,8,51,11,1,22,2,4,0,0,0,39,95,57,132,17,23,0,0,0,24,5,Data I/O Oriented,1,* Needs more comments. 
+C:\xampp\htdocs\DogBloodDonorBackend\hospital\staff_bloodtype.php,6,43,35,22,31,32,8,3,20,3,4,0,0,0,96,152,67,150,14,16,0,0,0,22,5,Data I/O Oriented,0,
+C:\xampp\htdocs\DogBloodDonorBackend\hospital\staff_manageblood.php,13,40,37,23,23,20,12,1,36,4,3,0,27,66,118,372,83,345,31,21,0,6,6,101,3,Data I/O Oriented,0,
+C:\xampp\htdocs\DogBloodDonorBackend\hospital\staff_manageblood_edit.php,3,48,33,19,6,56,11,0,20,3,5,0,9,50,21,90,56,115,13,10,0,1,1,10,1,Data I/O Oriented,0,
+C:\xampp\htdocs\DogBloodDonorBackend\hospital\staff_manageblood_history.php,4,40,37,23,29,24,8,0,32,4,3,0,0,0,76,328,74,188,24,6,0,0,0,27,2,Data I/O Oriented,0,
+C:\xampp\htdocs\DogBloodDonorBackend\hospital\staff_manageblood_use.php,3,45,35,20,19,45,7,0,20,3,6,0,0,0,90,85,65,92,8,13,0,0,0,14,1,Data I/O Oriented,0,
+C:\xampp\htdocs\DogBloodDonorBackend\hospital\staff_managedog.php,6,37,39,24,21,18,13,0,41,3,3,0,0,0,88,233,73,411,30,11,0,0,0,29,0,Data I/O Oriented,0,
+C:\xampp\htdocs\DogBloodDonorBackend\hospital\staff_managedog_delete.php,1,53,29,18,0,73,6,0,12,2,6,0,0,0,25,20,28,42,6,4,0,0,0,4,0,Data I/O Oriented,0,
+C:\xampp\htdocs\DogBloodDonorBackend\hospital\staff_managedog_edit.php,5,44,35,21,28,33,12,0,17,3,7,1,31,100,124,68,53,214,15,18,0,6,6,18,1,Data I/O Oriented,0,
+
+Entire Project Totals,75,42,36,22,24,32,10,1,25,3,5,0,9,30,96,153,68,205,19,183,0,17,17,319,27,Data I/O Oriented,2,
+
